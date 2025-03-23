@@ -3,6 +3,7 @@ package ru.hogwarts.school.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.util.Objects;
@@ -11,7 +12,7 @@ import java.util.Objects;
 public class Student {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
     private Long id;
 
@@ -62,10 +63,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-               "id=" + id +
-               ", name='" + name + '\'' +
-               ", age=" + age +
-               '}';
+        return "Student{" + "id=" + id + ", name='" + name + '\'' + ", age=" + age + '}';
     }
 }

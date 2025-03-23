@@ -1,5 +1,6 @@
 package ru.hogwarts.school.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repositories.StudentRepository;
@@ -24,11 +25,11 @@ public class StudentService {
     }
 
     public Student editStudent(Student student) {
-       return studentRepository.save(student);
+        return studentRepository.save(student);
     }
 
     public void deleteStudent(long id) {
-         studentRepository.deleteById(id);
+        studentRepository.deleteById(id);
     }
 
     public Collection<Student> getAllStudent() {

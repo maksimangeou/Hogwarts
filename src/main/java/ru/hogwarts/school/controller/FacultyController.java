@@ -41,7 +41,7 @@ public class FacultyController {
     }
 
     @GetMapping("filter")
-    public ResponseEntity<Collection<Faculty>> getFacultiesByColor(@RequestParam (required = false) String color) {
+    public ResponseEntity<Collection<Faculty>> getFacultiesByColor(@RequestParam(required = false) String color) {
         if (color != null && !color.isBlank()) {
             return ResponseEntity.ok(facultyService.findFacultiesByColor(color));
         }

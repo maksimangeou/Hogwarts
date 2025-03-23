@@ -1,10 +1,12 @@
 package ru.hogwarts.school.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.service.FacultyService;
 
 import java.util.Collection;
+import java.util.Collections;
 
 
 @RestController
@@ -23,8 +25,9 @@ public class FacultyController {
     }
 
     @PostMapping
-    public Faculty postFaculty(@RequestBody Faculty faculty) {
-        return facultyService.createFaculty(faculty);
+    public long postFaculty(@RequestBody Faculty faculty) {
+        facultyService.createFaculty(faculty);
+        return faculty.getId();
     }
 
     @PutMapping
@@ -33,13 +36,16 @@ public class FacultyController {
     }
 
     @DeleteMapping("{id}")
-    public Faculty deleteFaculty(@PathVariable long id) {
-        return facultyService.deleteFaculty(id);
+    public void deleteFaculty(@PathVariable long id) {
+        facultyService.deleteFaculty(id);
     }
 
     @GetMapping("filter")
-    public Collection<Faculty> getFacultiesByColor(@RequestParam String color) {
-        return facultyService.findFacultiesByColor(color);
+    public ResponseEntity<Collection<Faculty>> getFacultiesByColor(@RequestParam (required = false) String color) {
+        if (color != null && !color.isBlank()) {
+            return ResponseEntity.ok(facultyService.findFacultiesByColor(color));
+        }
+        return ResponseEntity.ok(Collections.emptyList());
     }
 
 

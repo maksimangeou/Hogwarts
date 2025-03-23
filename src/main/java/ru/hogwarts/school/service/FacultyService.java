@@ -32,14 +32,7 @@ public class FacultyService {
     }
 
     public Collection<Faculty> findFacultiesByColor(String color) {
-        List<Faculty> faculties = facultyRepository.findAll();
-        List<Faculty> result = new ArrayList<>();
-        for (Faculty value : faculties) {
-            if (value.getColor().equalsIgnoreCase(color)) {
-                result.add(value);
-            }
-        }
-        return result;
+        return facultyRepository.findByColor(color);
     }
 
 }

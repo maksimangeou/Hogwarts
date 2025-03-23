@@ -32,7 +32,7 @@ public class FacultyService {
 
     public Collection<Faculty> findFacultiesByColor(String color) {
         List<Faculty> result = new ArrayList<>();
-        for (Faculty value: faculties.values()) {
+        for (Faculty value : faculties.values()) {
             if (value.getColor().equalsIgnoreCase(color)) {
                 result.add(value);
             }

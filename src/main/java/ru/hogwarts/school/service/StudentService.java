@@ -30,9 +30,9 @@ public class StudentService {
         return students.remove(id);
     }
 
-    public Collection<Student> findStudentByAge (int age) {
+    public Collection<Student> findStudentByAge(int age) {
         List<Student> result = new ArrayList<>();
-        for(Student value: students.values()) {
+        for (Student value : students.values()) {
             if (value.getAge() == age) {
                 result.add(value);
             }

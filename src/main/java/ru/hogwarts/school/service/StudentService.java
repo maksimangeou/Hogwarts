@@ -3,9 +3,8 @@ package ru.hogwarts.school.service;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.SplittableRandom;
+import java.time.Period;
+import java.util.*;
 
 @Service
 public class StudentService {
@@ -29,6 +28,16 @@ public class StudentService {
 
     public Student deleteStudent(long id) {
         return students.remove(id);
+    }
+
+    public Collection<Student> findStudentByAge (int age) {
+        List<Student> result = new ArrayList<>();
+        for(Student value: students.values()) {
+            if (value.getAge() == age) {
+                result.add(value);
+            }
+        }
+        return result;
     }
 
 }

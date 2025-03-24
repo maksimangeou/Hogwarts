@@ -44,5 +44,11 @@ public class StudentController {
         return studentService.findStudentByAge(age);
     }
 
+    @GetMapping("filter/between")
+    public Collection<Student> getStudentByAgeBetween(@RequestParam() int ageFrom,
+                                                      @RequestParam() int ageTo) {
+        return studentService.findStudentByAfeBetweenFromTo(ageFrom, ageTo);
+    }
+
 
 }

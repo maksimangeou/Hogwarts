@@ -21,7 +21,7 @@ public class StudentService {
     }
 
     public Student findStudent(long id) {
-        return studentRepository.findById(id).get();
+        return studentRepository.findById(id);
     }
 
     public Student editStudent(Student student) {
@@ -38,6 +38,10 @@ public class StudentService {
 
     public Collection<Student> findStudentByAge(int age) {
         return studentRepository.findByAge(age);
+    }
+
+    public Collection<Student> findStudentByAfeBetweenFromTo(int from, int to) {
+        return studentRepository.findByAgeBetween(from, to);
     }
 
 }

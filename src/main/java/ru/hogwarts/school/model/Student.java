@@ -23,6 +23,12 @@ public class Student {
     public Student() {
     }
 
+    public Student(Long id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
     public Student(String name, int age) {
         this.name = name;
         this.age = age;

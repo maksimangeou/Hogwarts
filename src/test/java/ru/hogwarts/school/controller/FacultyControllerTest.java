@@ -11,7 +11,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.repositories.FacultyRepository;
-import ru.hogwarts.school.repositories.StudentRepository;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,15 +26,12 @@ class FacultyControllerTest {
     @Autowired
     private FacultyRepository facultyRepository;
 
-    @Autowired
-    private StudentRepository studentRepository;
-
     @LocalServerPort
     private int port;
 
 
     @Test
-    void testGetFaculty() throws Exception {
+    void testGetFaculty() {
         Assertions
                 .assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/faculties/1", String.class))
                 .isNotNull();

@@ -34,7 +34,7 @@ public class StudentControllerTest {
     private int port;
 
     @Test
-    void testGetStudent() throws Exception {
+    void testGetStudent() {
         Assertions
                 .assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/student/1", String.class))
                 .isNotNull();
@@ -83,7 +83,7 @@ public class StudentControllerTest {
 
     @Test
     void deleteStudent_RemovesFromDb() {
-        Student student = studentRepository.save(new Student("Neville Longbottom", 20));
+        Student student = studentRepository.save(new Student("Невил Долгопупс", 20));
 
         restTemplate.delete("/students/" + student.getId());
 

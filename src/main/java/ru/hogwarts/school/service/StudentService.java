@@ -22,12 +22,18 @@ public class StudentService {
     @Value("${avatars.dir.path}")
     private String avatarsDir;
 
-    private final StudentRepository studentRepository;
-    private final AvatarRepository avatarRepository;
+    private StudentRepository studentRepository;
+    private AvatarRepository avatarRepository;
+
+
 
     public StudentService(StudentRepository studentRepository, AvatarRepository avatarRepository) {
         this.studentRepository = studentRepository;
         this.avatarRepository = avatarRepository;
+    }
+
+    public StudentService() {
+
     }
 
     public Student createStudent(Student student) {

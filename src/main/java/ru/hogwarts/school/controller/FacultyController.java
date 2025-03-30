@@ -1,5 +1,6 @@
 package ru.hogwarts.school.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
@@ -24,9 +25,9 @@ public class FacultyController {
     }
 
     @PostMapping
-    public long postFaculty(@RequestBody Faculty faculty) {
-        facultyService.createFaculty(faculty);
-        return faculty.getId();
+    public Faculty postFaculty(@RequestBody Faculty faculty) {
+        Faculty created = facultyService.createFaculty(faculty);
+        return created;
     }
 
     @PutMapping

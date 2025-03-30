@@ -35,9 +35,8 @@ public class StudentController {
     }
 
     @PostMapping
-    public long postStudent(@RequestBody Student student) {
-        studentService.createStudent(student);
-        return student.getId();
+    public Student postStudent(@RequestBody Student student) {
+        return studentService.createStudent(student);
     }
 
     @PutMapping
@@ -57,7 +56,7 @@ public class StudentController {
 
     @GetMapping("filter/between")
     public List<Student> getStudentByAgeBetween(@RequestParam() int min,
-                                                      @RequestParam() int max) {
+                                                @RequestParam() int max) {
         return studentService.findStudentByAfeBetweenFromTo(min, max);
     }
 
@@ -68,7 +67,7 @@ public class StudentController {
 
     @PostMapping(value = "/{id}/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> uploadAvatar(@PathVariable Long id, @RequestParam MultipartFile avatar) throws IOException {
-        if(avatar.getSize() > 1024*300) {
+        if (avatar.getSize() > 1024 * 300) {
             return ResponseEntity.badRequest().body("Файл слишком большой");
         }
 

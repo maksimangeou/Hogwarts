@@ -1,19 +1,17 @@
 package ru.hogwarts.school.controller;
 
 import org.json.JSONObject;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.FacultyService;
+import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collections;
 
@@ -22,21 +20,18 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ExtendWith(MockitoExtension.class)
+@WebMvcTest (controllers = FacultyController.class)
 public class FacultyControllerTest {
 
+    @Autowired
     private MockMvc mvc;
 
-    @Mock
+    @MockBean
     private FacultyService facultyService;
 
-    @InjectMocks
-    private FacultyController facultyController;
+    @MockBean
+    StudentService studentService;
 
-    @BeforeEach
-    void setup() {
-        mvc = MockMvcBuilders.standaloneSetup(facultyController).build();
-    }
 
     @Test
     void getFacultyByIdTest() throws Exception {
@@ -145,6 +140,14 @@ public class FacultyControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].name").value("Harry Potter"));
+    }
+
+    @Test
+    void getFacultyByNotExistId() throws  Exception {
+        when(facultyService.findFaculty(999L)).thenReturn(null);
+
+        mvc.perform(MockMvcRequestBuilders.get("/faculties/999"))
+                .andExpect(status().isNotFound());
     }
 
 }

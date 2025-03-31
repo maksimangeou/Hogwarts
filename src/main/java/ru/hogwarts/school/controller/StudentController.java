@@ -40,8 +40,12 @@ public class StudentController {
     }
 
     @PutMapping
-    public Student putStudent(@RequestBody Student student) {
-        return studentService.editStudent(student);
+    public ResponseEntity<Student> putStudent(@RequestBody Student student) {
+        Student studentFound = studentService.editStudent(student);
+        if (studentFound == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(studentFound);
     }
 
     @DeleteMapping("{id}")

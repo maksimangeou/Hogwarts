@@ -1,19 +1,16 @@
 package ru.hogwarts.school.controller;
 
 import org.json.JSONObject;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import ru.hogwarts.school.model.Avatar;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
@@ -29,21 +26,15 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ExtendWith(MockitoExtension.class)
+@WebMvcTest(controllers = StudentController.class)
 public class StudentControllerTest {
 
+    @Autowired
     private MockMvc mvc;
 
-    @Mock
+    @MockBean
     private StudentService studentService;
 
-    @InjectMocks
-    private StudentController studentController;
-
-    @BeforeEach
-    void setup() {
-        mvc = MockMvcBuilders.standaloneSetup(studentController).build();
-    }
 
     @Test
     void saveStudentTest() throws Exception {
@@ -209,6 +200,16 @@ public class StudentControllerTest {
 
         assertThat(response.getContentType()).isEqualTo("image/jpeg");
         assertThat(response.getContentAsByteArray()).isEqualTo(Files.readAllBytes(testFile));
+    }
+
+    @Test
+    void updateNotExistStudent() throws Exception {
+        when (studentService.editStudent(any(Student.class))).thenReturn(null);
+
+        mvc.perform(MockMvcRequestBuilders.put("/students")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"id\": 999}"))
+                .andExpect(status().isNotFound());
     }
 
 }

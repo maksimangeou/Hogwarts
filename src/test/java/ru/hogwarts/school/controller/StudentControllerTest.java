@@ -102,7 +102,8 @@ public class StudentControllerTest {
 
         when(studentService.findStudentByAge(20)).thenReturn(expected);
 
-        mvc.perform(MockMvcRequestBuilders.get("/students/filter?age=20"))
+        mvc.perform(MockMvcRequestBuilders.get("/students/filter")
+                        .param("age", String.valueOf(20)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].age").value(20));
     }
@@ -115,7 +116,9 @@ public class StudentControllerTest {
 
         when(studentService.findStudentByAfeBetweenFromTo(20, 30)).thenReturn(expected);
 
-        mvc.perform(MockMvcRequestBuilders.get("/students/filter/between?min=20&max=30"))
+        mvc.perform(MockMvcRequestBuilders.get("/students/filter/between")
+                        .param("min", String.valueOf(20))
+                        .param("max", String.valueOf(30)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].age").value(25));
     }
@@ -204,11 +207,11 @@ public class StudentControllerTest {
 
     @Test
     void updateNotExistStudent() throws Exception {
-        when (studentService.editStudent(any(Student.class))).thenReturn(null);
+        when(studentService.editStudent(any(Student.class))).thenReturn(null);
 
         mvc.perform(MockMvcRequestBuilders.put("/students")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"id\": 999}"))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"id\": 999}"))
                 .andExpect(status().isNotFound());
     }
 

@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest (controllers = FacultyController.class)
+@WebMvcTest(controllers = FacultyController.class)
 public class FacultyControllerTest {
 
     @Autowired
@@ -105,7 +105,7 @@ public class FacultyControllerTest {
 
         when(facultyService.findFacultiesByColor("Blue")).thenReturn(Collections.singletonList(faculty));
 
-        mvc.perform(MockMvcRequestBuilders.get("/faculties/filter?color=Blue"))
+        mvc.perform(MockMvcRequestBuilders.get("/faculties/filter").param("color", "Blue"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].color").value("Blue"));
     }
@@ -119,7 +119,9 @@ public class FacultyControllerTest {
         when(facultyService.findFacultyByNameIgnoreCaseOrColorIgnoreCase("griff", "red"))
                 .thenReturn(Collections.singletonList(faculty));
 
-        mvc.perform(MockMvcRequestBuilders.get("/faculties/find?name=griff&color=red"))
+        mvc.perform(MockMvcRequestBuilders.get("/faculties/find")
+                        .param("name", "griff")
+                        .param("color", "red"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name").value("Griffindor"))
                 .andExpect(jsonPath("$[0].color").value("Red"));
@@ -143,7 +145,7 @@ public class FacultyControllerTest {
     }
 
     @Test
-    void getFacultyByNotExistId() throws  Exception {
+    void getFacultyByNotExistId() throws Exception {
         when(facultyService.findFaculty(999L)).thenReturn(null);
 
         mvc.perform(MockMvcRequestBuilders.get("/faculties/999"))

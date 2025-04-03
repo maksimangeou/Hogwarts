@@ -1,5 +1,6 @@
 package ru.hogwarts.school.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
@@ -19,14 +20,18 @@ public class FacultyController {
     }
 
     @GetMapping("{id}")
-    public Faculty getFaculty(@PathVariable long id) {
-        return facultyService.findFaculty(id);
+    public ResponseEntity<Faculty> getFaculty(@PathVariable long id) {
+        Faculty faculty = facultyService.findFaculty(id);
+        if ( faculty != null) {
+            return ResponseEntity.ok(faculty);
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public long postFaculty(@RequestBody Faculty faculty) {
-        facultyService.createFaculty(faculty);
-        return faculty.getId();
+    public Faculty postFaculty(@RequestBody Faculty faculty) {
+        Faculty created = facultyService.createFaculty(faculty);
+        return created;
     }
 
     @PutMapping

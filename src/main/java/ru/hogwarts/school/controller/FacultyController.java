@@ -22,7 +22,7 @@ public class FacultyController {
     @GetMapping("{id}")
     public ResponseEntity<Faculty> getFaculty(@PathVariable long id) {
         Faculty faculty = facultyService.findFaculty(id);
-        if ( faculty != null) {
+        if (faculty != null) {
             return ResponseEntity.ok(faculty);
         }
         return ResponseEntity.notFound().build();
@@ -51,7 +51,7 @@ public class FacultyController {
 
     @GetMapping("find")
     public List<Faculty> getFacultyByNameIgnoreCaseOrColorIgnoreCase(@RequestParam(required = false) String name,
-                                                                           @RequestParam(required = false) String color) {
+                                                                     @RequestParam(required = false) String color) {
         return facultyService.findFacultyByNameIgnoreCaseOrColorIgnoreCase(name, color);
     }
 

@@ -20,7 +20,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 @RestController
-@RequestMapping("students")
+@RequestMapping("/students")
 public class StudentController {
 
     private final StudentService studentService;
@@ -98,12 +98,27 @@ public class StudentController {
         Path path = Path.of(avatar.getFilePath());
 
         try (InputStream is = Files.newInputStream(path);
-             OutputStream os = response.getOutputStream();) {
+             OutputStream os = response.getOutputStream()) {
             response.setStatus(200);
             response.setContentType(avatar.getMediaType());
             response.setContentLength((int) avatar.getFileSize());
             is.transferTo(os);
         }
+    }
+
+    @GetMapping("/students-count")
+    public Integer getStudentCount() {
+        return studentService.getStudentCount();
+    }
+
+    @GetMapping("/student-avg")
+    public Double getAverageStudentAge() {
+        return studentService.getAverageStudentAge();
+    }
+
+    @GetMapping("/last-five-students")
+    public List<Student> getLastFiveStudent() {
+        return studentService.getLastFiveStudent();
     }
 
 }

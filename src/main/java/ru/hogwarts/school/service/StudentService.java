@@ -73,7 +73,7 @@ public class StudentService {
         try (InputStream is = file.getInputStream();
              OutputStream os = Files.newOutputStream(filePath, CREATE_NEW);
              BufferedInputStream bis = new BufferedInputStream(is, 1024);
-             BufferedOutputStream bos = new BufferedOutputStream(os, 1024);
+             BufferedOutputStream bos = new BufferedOutputStream(os, 1024)
         ) {
             bis.transferTo(bos);
         }
@@ -90,6 +90,20 @@ public class StudentService {
 
     private String getExtension(String fileName) {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
+    }
+
+
+
+    public Integer getStudentCount() {
+        return studentRepository.getStudentCount();
+    }
+
+    public Double getAverageStudentAge() {
+        return studentRepository.getAverageStudentAge();
+    }
+
+    public List<Student> getLastFiveStudent() {
+        return studentRepository.findLastFiveStudent();
     }
 
 }

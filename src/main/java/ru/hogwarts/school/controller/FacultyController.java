@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("faculties")
+@RequestMapping("/faculties")
 public class FacultyController {
 
     private final FacultyService facultyService;
@@ -22,7 +22,7 @@ public class FacultyController {
     @GetMapping("{id}")
     public ResponseEntity<Faculty> getFaculty(@PathVariable long id) {
         Faculty faculty = facultyService.findFaculty(id);
-        if ( faculty != null) {
+        if (faculty != null) {
             return ResponseEntity.ok(faculty);
         }
         return ResponseEntity.notFound().build();
@@ -30,8 +30,7 @@ public class FacultyController {
 
     @PostMapping
     public Faculty postFaculty(@RequestBody Faculty faculty) {
-        Faculty created = facultyService.createFaculty(faculty);
-        return created;
+        return facultyService.createFaculty(faculty);
     }
 
     @PutMapping
@@ -51,7 +50,7 @@ public class FacultyController {
 
     @GetMapping("find")
     public List<Faculty> getFacultyByNameIgnoreCaseOrColorIgnoreCase(@RequestParam(required = false) String name,
-                                                                           @RequestParam(required = false) String color) {
+                                                                     @RequestParam(required = false) String color) {
         return facultyService.findFacultyByNameIgnoreCaseOrColorIgnoreCase(name, color);
     }
 

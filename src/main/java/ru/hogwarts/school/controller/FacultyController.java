@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("faculties")
+@RequestMapping("/faculties")
 public class FacultyController {
 
     private final FacultyService facultyService;
@@ -30,8 +30,7 @@ public class FacultyController {
 
     @PostMapping
     public Faculty postFaculty(@RequestBody Faculty faculty) {
-        Faculty created = facultyService.createFaculty(faculty);
-        return created;
+        return facultyService.createFaculty(faculty);
     }
 
     @PutMapping

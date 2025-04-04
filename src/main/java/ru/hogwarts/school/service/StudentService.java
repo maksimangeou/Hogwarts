@@ -1,7 +1,6 @@
 package ru.hogwarts.school.service;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -74,7 +73,7 @@ public class StudentService {
         try (InputStream is = file.getInputStream();
              OutputStream os = Files.newOutputStream(filePath, CREATE_NEW);
              BufferedInputStream bis = new BufferedInputStream(is, 1024);
-             BufferedOutputStream bos = new BufferedOutputStream(os, 1024);
+             BufferedOutputStream bos = new BufferedOutputStream(os, 1024)
         ) {
             bis.transferTo(bos);
         }
@@ -93,10 +92,7 @@ public class StudentService {
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 
-    public List<Avatar> getAllAvatarCollection(Integer pageNumber, Integer pageSize) {
-        PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize);
-        return avatarRepository.findAll(pageRequest).getContent();
-    }
+
 
     public Integer getStudentCount() {
         return studentRepository.getStudentCount();

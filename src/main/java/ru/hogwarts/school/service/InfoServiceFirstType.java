@@ -1,0 +1,20 @@
+package ru.hogwarts.school.service;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
+import ru.hogwarts.school.model.Info;
+
+@Service
+@Profile("portFirstType")
+public class InfoServiceFirstType implements InfoService {
+
+    @Value("${server.port}")
+    private int port;
+
+    public Info getPort() {
+        Info info = new Info();
+        info.setPort(port);
+        return info;
+    }
+}

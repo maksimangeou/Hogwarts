@@ -24,7 +24,7 @@ public class StudentService {
     @Value("${avatars.dir.path}")
     private String avatarsDir;
 
-    Logger logger = LoggerFactory.getLogger(StudentService.class);
+    private static final Logger logger = LoggerFactory.getLogger(StudentService.class);
 
     private final StudentRepository studentRepository;
     private final AvatarRepository avatarRepository;

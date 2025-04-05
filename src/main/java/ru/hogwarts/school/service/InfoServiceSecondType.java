@@ -10,8 +10,10 @@ import ru.hogwarts.school.model.Info;
 public class InfoServiceSecondType implements InfoService {
 
     public Info getPort() {
+        logger.info("Запуск метода getPort в portSecondType");
         Info info = new Info();
         info.setPort(4040);
+        logger.debug("portSecondType = {}", info);
         return info;
     }
 }

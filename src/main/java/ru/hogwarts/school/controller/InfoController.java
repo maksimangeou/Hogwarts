@@ -14,6 +14,7 @@ public class InfoController {
     @Autowired
     private final InfoService infoService;
 
+    @Autowired
     public InfoController(InfoService infoService) {
         this.infoService = infoService;
     }

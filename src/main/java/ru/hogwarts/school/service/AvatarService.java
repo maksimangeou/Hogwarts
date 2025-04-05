@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class AvatarService {
 
-    Logger logger = LoggerFactory.getLogger(AvatarService.class);
+    private static final Logger logger = LoggerFactory.getLogger(AvatarService.class);
 
 
     private final AvatarRepository avatarRepository;

@@ -13,8 +13,10 @@ public class InfoServiceFirstType implements InfoService {
     private int port;
 
     public Info getPort() {
+        logger.info("Запуск метода getPort в portFirstType");
         Info info = new Info();
         info.setPort(port);
+        logger.debug("portFirstType = {}", info);
         return info;
     }
 }

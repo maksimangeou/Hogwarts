@@ -29,7 +29,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public Student getStudent(@PathVariable long id) {
         return studentService.findStudent(id);
     }
@@ -48,23 +48,23 @@ public class StudentController {
         return ResponseEntity.ok(studentFound);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public void deleteStudent(@PathVariable long id) {
         studentService.deleteStudent(id);
     }
 
-    @GetMapping("filter")
+    @GetMapping("/filter")
     public List<Student> getStudentByAge(@RequestParam(required = false) int age) {
         return studentService.findStudentByAge(age);
     }
 
-    @GetMapping("filter/between")
+    @GetMapping("/filter/between")
     public List<Student> getStudentByAgeBetween(@RequestParam() int min,
                                                 @RequestParam() int max) {
         return studentService.findStudentByAfeBetweenFromTo(min, max);
     }
 
-    @GetMapping("{id}/faculty")
+    @GetMapping("/{id}/faculty")
     public Faculty getFacultyByStudentId(@PathVariable long id) {
         return studentService.findStudent(id).getFaculty();
     }

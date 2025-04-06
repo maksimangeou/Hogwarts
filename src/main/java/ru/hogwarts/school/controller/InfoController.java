@@ -9,7 +9,7 @@ import ru.hogwarts.school.model.Info;
 import ru.hogwarts.school.service.InfoService;
 
 @RestController
-@RequestMapping("/info-port")
+@RequestMapping
 public class InfoController {
 
 
@@ -20,7 +20,7 @@ public class InfoController {
         this.infoService = infoService;
     }
 
-    @GetMapping
+    @GetMapping("/port")
     public Info getPort() {
         return infoService.getPort();
     }

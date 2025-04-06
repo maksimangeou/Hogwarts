@@ -12,8 +12,6 @@ import ru.hogwarts.school.service.InfoService;
 @RequestMapping
 public class InfoController {
 
-
-    @Autowired
     private final InfoService infoService;
 
     public InfoController(InfoService infoService) {

@@ -24,7 +24,7 @@ public class StudentService {
     @Value("${avatars.dir.path}")
     private String avatarsDir;
 
-    private static final Logger logger = LoggerFactory.getLogger(StudentService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StudentService.class);
 
     private final StudentRepository studentRepository;
     private final AvatarRepository avatarRepository;
@@ -35,48 +35,48 @@ public class StudentService {
     }
 
     public Student createStudent(Student student) {
-        logger.info("Вызван метод createStudent");
+        LOGGER.info("Вызван метод createStudent");
         return studentRepository.save(student);
     }
 
     public Student findStudent(long id) {
-        logger.info("Вызван метод findStudent({})", id);
+        LOGGER.info("Вызван метод findStudent({})", id);
         return studentRepository.findById(id);
     }
 
     public Student editStudent(Student student) {
-        logger.info("Вызван метод editStudent({})", student);
+        LOGGER.info("Вызван метод editStudent({})", student);
         return studentRepository.save(student);
     }
 
     public void deleteStudent(long id) {
-        logger.info("Вызван метод deleteStudent({})", id);
+        LOGGER.info("Вызван метод deleteStudent({})", id);
         studentRepository.deleteById(id);
     }
 
     public List<Student> getAllStudent() {
-        logger.info("Вызван метод getAllStudent()");
+        LOGGER.info("Вызван метод getAllStudent()");
         return studentRepository.findAll();
     }
 
     public List<Student> findStudentByAge(int age) {
-        logger.info("Вызван метод findStudentByAge({})", age);
+        LOGGER.info("Вызван метод findStudentByAge({})", age);
         return studentRepository.findByAge(age);
     }
 
     public List<Student> findStudentByAfeBetweenFromTo(int from, int to) {
-        logger.info("Вызван метод findStudentByAfeBetweenFromTo({}, {})", from, to);
+        LOGGER.info("Вызван метод findStudentByAfeBetweenFromTo({}, {})", from, to);
         return studentRepository.findByAgeBetween(from, to);
     }
 
     @Transactional
     public Avatar findAvatar(long studentId) {
-        logger.info("Вызван метод findAvatar({})", studentId);
+        LOGGER.info("Вызван метод findAvatar({})", studentId);
         return avatarRepository.findByStudentId(studentId).orElseThrow();
     }
 
     public void uploadAvatar(Long studentId, MultipartFile file) throws IOException {
-        logger.info("Вызван метод uploadAvatar({}, {})", studentId, file);
+        LOGGER.info("Вызван метод uploadAvatar({}, {})", studentId, file);
 
         Student student = findStudent(studentId);
 
@@ -108,19 +108,19 @@ public class StudentService {
 
 
     public Integer getStudentCount() {
-        logger.info("Вызван метод getStudentCount()");
+        LOGGER.info("Вызван метод getStudentCount()");
 
         return studentRepository.getStudentCount();
     }
 
     public Double getAverageStudentAge() {
-        logger.info("Вызван метод getAverageStudentAge()");
+        LOGGER.info("Вызван метод getAverageStudentAge()");
 
         return studentRepository.getAverageStudentAge();
     }
 
     public List<Student> getLastFiveStudent() {
-        logger.info("Вызван метод getLastFiveStudent()");
+        LOGGER.info("Вызван метод getLastFiveStudent()");
 
         return studentRepository.findLastFiveStudent();
     }

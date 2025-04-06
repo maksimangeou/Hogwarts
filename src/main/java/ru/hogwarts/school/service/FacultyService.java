@@ -11,7 +11,7 @@ import java.util.*;
 @Service
 public class FacultyService {
 
-    private static final Logger logger = LoggerFactory.getLogger(FacultyService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FacultyService.class);
 
     private final FacultyRepository facultyRepository;
 
@@ -20,38 +20,38 @@ public class FacultyService {
     }
 
     public Faculty createFaculty(Faculty faculty) {
-        logger.info("Вызван метод createFaculty({})", faculty);
+        LOGGER.info("Вызван метод createFaculty({})", faculty);
 
         return facultyRepository.save(faculty);
     }
 
     public Faculty findFaculty(long id) {
-        logger.info("Вызван метод findFaculty({})", id);
+        LOGGER.info("Вызван метод findFaculty({})", id);
 
         return facultyRepository.findById(id);
     }
 
     public Faculty updateFaculty(Faculty faculty) {
-        logger.info("Вызван метод updateFaculty({})", faculty);
+        LOGGER.info("Вызван метод updateFaculty({})", faculty);
 
         return facultyRepository.save(faculty);
     }
 
     public void deleteFaculty(long id) {
-        logger.info("Вызван метод deleteFaculty({})", id);
+        LOGGER.info("Вызван метод deleteFaculty({})", id);
 
         facultyRepository.deleteById(id);
     }
 
     public List<Faculty> findFacultiesByColor(String color) {
-        logger.info("Вызван метод findFacultiesByColor({})", color);
+        LOGGER.info("Вызван метод findFacultiesByColor({})", color);
 
         return facultyRepository.findByColor(color);
     }
 
 
     public List<Faculty> findFacultyByNameIgnoreCaseOrColorIgnoreCase(String name, String color) {
-        logger.info("Вызван метод findFacultyByNameIgnoreCaseOrColorIgnoreCase({}, {})", name, color);
+        LOGGER.info("Вызван метод findFacultyByNameIgnoreCaseOrColorIgnoreCase({}, {})", name, color);
 
         return facultyRepository.findAllByNameIgnoreCaseOrColorIgnoreCase(name, color);
     }

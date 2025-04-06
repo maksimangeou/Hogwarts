@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class AvatarService {
 
-    private static final Logger logger = LoggerFactory.getLogger(AvatarService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AvatarService.class);
 
 
     private final AvatarRepository avatarRepository;
@@ -22,15 +22,15 @@ public class AvatarService {
     }
 
     public List<Avatar> getAllAvatarCollection(Integer pageNumber, Integer pageSize) {
-        logger.info("Вызван метод getAllAvatarCollection({}, {})", pageNumber, pageSize);
+        LOGGER.info("Вызван метод getAllAvatarCollection({}, {})", pageNumber, pageSize);
 
         if (pageNumber == 0) {
-            logger.error("Поле pageNumber принимает значение отрицательного числа");
+            LOGGER.error("Поле pageNumber принимает значение отрицательного числа");
             throw new RuntimeException();
         } else {
             PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize);
             List<Avatar> avatarList = avatarRepository.findAll(pageRequest).getContent();
-            logger.debug("Список аватарок {} для страницы {} и размера {}", avatarList, pageNumber, pageSize);
+            LOGGER.debug("Список аватарок {} для страницы {} и размера {}", avatarList, pageNumber, pageSize);
             return avatarList;
         }
     }

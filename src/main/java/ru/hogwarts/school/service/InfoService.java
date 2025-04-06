@@ -9,17 +9,17 @@ import ru.hogwarts.school.model.Info;
 @Service
 public class InfoService {
 
-    Logger logger = LoggerFactory.getLogger(InfoService.class);
+    private static  final Logger LOGGER = LoggerFactory.getLogger(InfoService.class);
 
 
     @Value("${server.port}")
     private int port;
 
     public Info getPort() {
-        logger.info("Запуск метода getPort в portFirstType");
+        LOGGER.info("Запуск метода getPort в portFirstType");
         Info info = new Info();
         info.setPort(port);
-        logger.debug("portFirstType = {}", info);
+        LOGGER.debug("portFirstType = {}", info);
         return info;
     }
 }

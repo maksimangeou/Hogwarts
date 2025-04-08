@@ -56,4 +56,11 @@ public class FacultyService {
         return facultyRepository.findAllByNameIgnoreCaseOrColorIgnoreCase(name, color);
     }
 
+    public String getFacultyIncludeMoreWordInName() {
+        return facultyRepository.findAll().stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparingInt(String::length))
+                .orElse("");
+    }
+
 }

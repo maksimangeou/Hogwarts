@@ -23,4 +23,9 @@ public class InfoController {
         return infoService.getPort();
     }
 
+    @GetMapping("/progression-v1")
+    public int getSumProgression() {
+        return infoService.getSumProgression();
+    }
+
 }

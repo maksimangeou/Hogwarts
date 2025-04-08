@@ -24,8 +24,13 @@ public class InfoController {
     }
 
     @GetMapping("/progression-v1")
-    public int getSumProgression() {
+    public long getSumProgression() {
         return infoService.getSumProgression();
+    }
+
+    @GetMapping("/progression-v2")
+    public long getSumProgressionV2() {
+        return infoService.getSumProgressionV2();
     }
 
 }

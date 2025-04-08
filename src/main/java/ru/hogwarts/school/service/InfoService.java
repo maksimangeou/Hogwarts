@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Info;
 
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 @Service
@@ -27,9 +28,9 @@ public class InfoService {
 
 
     public int getSumProgression() {
-        return Stream.iterate(1, a -> a + 1)
+        return IntStream.iterate(1, a -> a + 1)
                 .parallel()
                 .limit(1_000_000)
-                .reduce(0, Integer::sum);
+                .sum();
     }
 }

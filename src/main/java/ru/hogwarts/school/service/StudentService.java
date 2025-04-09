@@ -15,6 +15,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
@@ -123,6 +124,20 @@ public class StudentService {
         LOGGER.info("Вызван метод getLastFiveStudent()");
 
         return studentRepository.findLastFiveStudent();
+    }
+
+    public List<String> getAllStudentNameToUpperCaseBySort() {
+        return studentRepository.findAll().stream()
+                .map(i -> i.getName().toUpperCase())
+                .sorted()
+                .toList();
+    }
+
+    public double getAvgStudentAge() {
+        return studentRepository.findAll().stream()
+                .mapToInt(Student::getAge)
+                .average()
+                .orElse(0);
     }
 
 }

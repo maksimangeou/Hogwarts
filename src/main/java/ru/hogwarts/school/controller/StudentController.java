@@ -121,4 +121,14 @@ public class StudentController {
         return studentService.getLastFiveStudent();
     }
 
+    @GetMapping("/sort-name-by-uppercase")
+    public List<String> getAllStudentNameToUpperCaseBySort() {
+        return studentService.getAllStudentNameToUpperCaseBySort();
+    }
+
+    @GetMapping("avg-age-student")
+    public double getAvgStudentAge() {
+        return studentService.getAvgStudentAge();
+    }
+
 }

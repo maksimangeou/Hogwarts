@@ -45,6 +45,10 @@ public class StudentService {
         return studentRepository.findById(id);
     }
 
+    public List<Student> findAll() {
+        return studentRepository.findAll();
+    }
+
     public Student editStudent(Student student) {
         LOGGER.info("Вызван метод editStudent({})", student);
         return studentRepository.save(student);

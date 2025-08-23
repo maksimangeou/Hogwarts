@@ -153,17 +153,14 @@ public class StudentController {
     public void printStudentsSynchronized() {
         List<Student> students = studentService.findAll().subList(0, 6); // Берем первых 6 студентов
 
-        // Основной поток - первые два имени
         printStudentNameSync(students.get(0).getName());
         printStudentNameSync(students.get(1).getName());
 
-        // Параллельный поток 1 - третий и четвертый
         new Thread(() -> {
             printStudentNameSync(students.get(2).getName());
             printStudentNameSync(students.get(3).getName());
         }).start();
 
-        // Параллельный поток 2 - пятый и шестой
         new Thread(() -> {
             printStudentNameSync(students.get(4).getName());
             printStudentNameSync(students.get(5).getName());

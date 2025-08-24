@@ -131,4 +131,44 @@ public class StudentController {
         return studentService.getAvgStudentAge();
     }
 
+    @GetMapping("/print-parallel")
+    public void printStudentParallel() {
+        List<Student> students = studentService.findAll().subList(0, 6);
+
+        System.out.println(students.get(0).getName());
+        System.out.println(students.get(1).getName());
+
+        new Thread(() -> {
+            System.out.println(students.get(2).getName());
+            System.out.println(students.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            System.out.println(students.get(4).getName());
+            System.out.println(students.get(5).getName());
+        }).start();
+    }
+
+    @GetMapping("/print-synchronized")
+    public void printStudentsSynchronized() {
+        List<Student> students = studentService.findAll().subList(0, 6); // Берем первых 6 студентов
+
+        printStudentNameSync(students.get(0).getName());
+        printStudentNameSync(students.get(1).getName());
+
+        new Thread(() -> {
+            printStudentNameSync(students.get(2).getName());
+            printStudentNameSync(students.get(3).getName());
+        }).start();
+
+        new Thread(() -> {
+            printStudentNameSync(students.get(4).getName());
+            printStudentNameSync(students.get(5).getName());
+        }).start();
+    }
+
+    private synchronized void printStudentNameSync(String name) {
+        System.out.println(name);
+    }
+
 }
